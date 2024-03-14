@@ -31,8 +31,10 @@ public class MultipleConverter {
                     System.out.println("BRL");
                     System.out.println("INR");
 
-                    currency = scanner.nextLine();
-                    System.out.println("These are all the conversion rates of the other currencies for" + currenciesArray.getCurrencyName(currency));
+                    do {
+                        currency = scanner.nextLine();
+                    } while (currency.equals(""));
+                    System.out.println("These are all the conversion rates of the other currencies for " + currenciesArray.getCurrencyName(currency));
 
                     currenciesArray.getCurrency(currency).getConversionRatesArray().forEach((k, v) -> System.out.println(k + " : " + v));
 
@@ -50,7 +52,9 @@ public class MultipleConverter {
                     System.out.println("BRL");
                     System.out.println("INR");
 
-                    currency = scanner.nextLine();
+                    do {
+                        currency = scanner.nextLine();
+                    } while (currency.equals(""));
                     System.out.println("Enter the amount of " + currenciesArray.getCurrencyName(currency) + " you want to convert to all other currencies:");
                     double amount = scanner.nextDouble();
 
