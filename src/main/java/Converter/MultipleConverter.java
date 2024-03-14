@@ -19,7 +19,7 @@ public class MultipleConverter {
 
             switch (selection){
                 case 1:
-                    System.out.println("Select the currencies you want to check the conversion rates of:");
+                    System.out.println("Select the currency you want to check the conversion rates of:");
                     System.out.println("USD");
                     System.out.println("EUR");
                     System.out.println("JPY");
