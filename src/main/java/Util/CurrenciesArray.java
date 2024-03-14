@@ -1,10 +1,17 @@
 package Util;
 
+import Uploader.ConversionRatesUploader;
+
 public class CurrenciesArray {
     Currency[] currenciesArray = new Currency[10];
 
     public CurrenciesArray() {
         addCurrency();
+        conversionRatesUpdate();
+    }
+
+    public Currency[] getCurrenciesArray() {
+        return currenciesArray;
     }
 
     public void addCurrency() {
@@ -60,5 +67,10 @@ public class CurrenciesArray {
             }
         }
         return null;
+    }
+
+    public void conversionRatesUpdate(CurrenciesArray this){
+        ConversionRatesUploader conversionRatesUploader = new ConversionRatesUploader();
+        conversionRatesUploader.manualUploadConversionRates(this);
     }
 }
