@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class SingleConverter {
     private final CurrenciesArray currenciesArray = new CurrenciesArray();
     private final Scanner scanner = new Scanner(System.in);
+    private String buffer;
 
     public void convert(){
         System.out.println("Conversion process initialized");
@@ -31,11 +32,16 @@ public class SingleConverter {
                 System.out.println("BRL");
                 System.out.println("INR");
 
-                currency = scanner.nextLine();
+                do {
+                    currency = scanner.nextLine();
+                } while (currency.equals(""));
                 System.out.println("Select the currency you want to compare");
-                String comparedCurrency = scanner.nextLine();
-                System.out.println("The conversion rate of " + currenciesArray.getCurrency(currency) +
-                        "with respect to" + currenciesArray.getCurrency(comparedCurrency) + "is : " +
+                String comparedCurrency;
+                do{
+                    comparedCurrency = scanner.nextLine();
+                }while(comparedCurrency.equals(""));
+                System.out.println("The conversion rate of " + currenciesArray.getCurrency(currency).getCurrencyName() +
+                        " with respect to " + currenciesArray.getCurrency(comparedCurrency).getCurrencyName() + " is : " +
                         currenciesArray.getCurrency(currency).getConversionRatesArray().get(comparedCurrency));
                 break;
             case 2:
@@ -51,9 +57,14 @@ public class SingleConverter {
                 System.out.println("BRL");
                 System.out.println("INR");
 
-                currency = scanner.nextLine();
+                do {
+                    currency = scanner.nextLine();
+                } while (currency.equals(""));
                 System.out.println("Select the currency you want to convert to:");
-                String convertedCurrency = scanner.nextLine();
+                String convertedCurrency;
+                do {
+                    convertedCurrency = scanner.nextLine();
+                } while (convertedCurrency.equals(""));
                 System.out.println("Enter the amount of " + currenciesArray.getCurrencyName(currency) + " you want to convert to " + currenciesArray.getCurrencyName(convertedCurrency) + ":");
                 double amount = scanner.nextDouble();
                 System.out.println("The amount of " + currenciesArray.getCurrencyName(currency) + " you want to convert to " + currenciesArray.getCurrencyName(convertedCurrency) + " is : " +
