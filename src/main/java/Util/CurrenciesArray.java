@@ -6,6 +6,10 @@ public class CurrenciesArray {
     Currency[] currenciesArray = new Currency[10];
 
     public CurrenciesArray() {
+        for (int i=0; i< currenciesArray.length;i++) {
+            currenciesArray[i] = new Currency();
+        }
+
         addCurrency();
         conversionRatesUpdate();
     }
