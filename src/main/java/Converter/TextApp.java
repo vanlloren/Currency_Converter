@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * The main class of the application
  */
-public class App {
+public class TextApp {
     private static final Scanner scanner = new Scanner(System.in);
     private final static ConversionLauncher conversionLauncher = new ConversionLauncher();
 
