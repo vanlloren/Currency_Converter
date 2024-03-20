@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import static java.awt.BorderLayout.CENTER;
 
 public class GraphicApp {
-    private static final GUIHandler guiHandler = new GUIHandler();
 
     static void lookAndFeel() {
         try {
@@ -61,7 +60,7 @@ public class GraphicApp {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 startingDialog.dispose();
-                guiHandler.mainMenu();
+                GUIHandler.mainMenu();
             }
         });
 
