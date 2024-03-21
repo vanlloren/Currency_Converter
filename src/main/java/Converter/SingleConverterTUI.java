@@ -4,7 +4,7 @@ import Util.CurrenciesArray;
 
 import java.util.Scanner;
 
-public class SingleConverter {
+public class SingleConverterTUI {
     private final CurrenciesArray currenciesArray = new CurrenciesArray();
     private final Scanner scanner = new Scanner(System.in);
     private String buffer;
@@ -42,7 +42,7 @@ public class SingleConverter {
                 }while(comparedCurrency.equals(""));
                 System.out.println("The conversion rate of " + currenciesArray.getCurrency(currency).getCurrencyName() +
                         " with respect to " + currenciesArray.getCurrency(comparedCurrency).getCurrencyName() + " is : " +
-                        currenciesArray.getCurrency(currency).getConversionRatesArray().get(comparedCurrency));
+                        SingleConverterExecutor.startConversionRate(currency, comparedCurrency, false));
                 break;
             case 2:
                 System.out.println("Select the currency you want to convert from:");
@@ -68,7 +68,7 @@ public class SingleConverter {
                 System.out.println("Enter the amount of " + currenciesArray.getCurrencyName(currency) + " you want to convert to " + currenciesArray.getCurrencyName(convertedCurrency) + ":");
                 double amount = scanner.nextDouble();
                 System.out.println("The amount of " + currenciesArray.getCurrencyName(currency) + " you want to convert to " + currenciesArray.getCurrencyName(convertedCurrency) + " is : " +
-                        currenciesArray.getCurrency(currency).getConversionRatesArray().get(convertedCurrency) * amount);
+                        SingleConverterExecutor.startConversion(currency, convertedCurrency, amount, false));
                 break;
         }
 
