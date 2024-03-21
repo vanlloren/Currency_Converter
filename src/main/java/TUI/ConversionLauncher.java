@@ -1,10 +1,13 @@
-package Converter;
+package TUI;
+
+import Converter.MultipleConverter;
+import Converter.SingleConverterTUI;
 
 public class ConversionLauncher {
     public void conversionMethod(char choice) {
         if (choice == 'a' || choice == 'A') {
             System.out.println("Initializing 1vs1 conversion process...");
-            SingleConverter singleConverter = new SingleConverter();
+            SingleConverterTUI singleConverter = new SingleConverterTUI();
             singleConverter.convert();
         } else {
             System.out.println("Initializing 1vsAll conversion process...");
