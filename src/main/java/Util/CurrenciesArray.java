@@ -3,7 +3,7 @@ package Util;
 import Uploader.ConversionRatesUploader;
 
 public class CurrenciesArray {
-    Currency[] currenciesArray = new Currency[10];
+    static Currency[] currenciesArray = new Currency[10];
 
     public CurrenciesArray() {
         for (int i=0; i< currenciesArray.length;i++) {
@@ -64,7 +64,7 @@ public class CurrenciesArray {
         return "Currency not found";
     }
 
-    public Currency getCurrency(String currencyCode) {
+    public static Currency getCurrency(String currencyCode) {
         for (Currency currency : currenciesArray) {
             if (currency.getCurrencyCode().equals(currencyCode)) {
                 return currency;
