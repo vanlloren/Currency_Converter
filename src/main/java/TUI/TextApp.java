@@ -1,4 +1,4 @@
-package Converter;
+package TUI;
 
 import java.util.Scanner;
 
