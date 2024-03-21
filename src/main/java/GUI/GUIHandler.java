@@ -338,7 +338,22 @@ public class GUIHandler {
             @Override
             public void mouseClicked(MouseEvent e) {
                 double conversion;
-                conversion = SingleConverterExecutor.startConversion(currencies.getSelectedItem().toString(), comparedCurrencies.getSelectedItem().toString(), Double.parseDouble(amount.getText()), true);
+                double effectiveAmount;
+                try {
+                    effectiveAmount = Double.parseDouble(amount.getText());
+                } catch (NumberFormatException ex) {
+                    JLabel label = new JLabel("The amount must be a number in the format 0.00");
+                    label.setVisible(true);
+                    label.setHorizontalAlignment(SwingConstants.CENTER);
+                    if (panel2.getComponentCount() > 0) {
+                        panel2.remove(0);
+                    }
+                    panel2.add(label, BorderLayout.CENTER);
+                    //refresh the frame
+                    singleConversionConvFrame.revalidate();
+                    return;
+                }
+                conversion = SingleConverterExecutor.startConversion(currencies.getSelectedItem().toString(), comparedCurrencies.getSelectedItem().toString(), effectiveAmount, true);
 
                 JLabel label = new JLabel("The converted amount is: " + conversion);
                 label.setVisible(true);
