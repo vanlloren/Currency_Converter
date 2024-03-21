@@ -20,7 +20,11 @@ public class GraphicApp {
         lookAndFeel();
         JDialog startingDialog = new JDialog();
         startingDialog.setTitle("Welcome");
-        // TODO startingDialog.setIconImage(new ImageIcon("src/main/resources/img.png").getImage());
+        startingDialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                System.exit(0);
+            }
+        });
 
         startingDialog.setVisible(true);
         startingDialog.setLayout(new BorderLayout());
