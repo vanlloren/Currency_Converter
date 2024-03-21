@@ -60,7 +60,7 @@ public class GraphicApp {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 startingDialog.dispose();
-                GUIHandler.mainMenu();
+                GUIHandler.begin();
             }
         });
 
