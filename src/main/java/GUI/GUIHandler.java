@@ -1,5 +1,6 @@
 package GUI;
 
+import Converter.MultipleConverterExecutor;
 import Converter.SingleConverterExecutor;
 
 import javax.swing.*;
@@ -9,6 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GUIHandler {
 
@@ -680,7 +683,7 @@ public class GUIHandler {
 
         JPanel panel2 = new JPanel();
         panel2.setVisible(true);
-        panel2.setLayout(new BorderLayout());
+        panel2.setLayout(new GridLayout(0,1));
 
         JPanel panel3 = new JPanel();
         panel3.setVisible(true);
@@ -695,7 +698,6 @@ public class GUIHandler {
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ArrayList<Double> conversionList;
                 double effectiveAmount;
                 try {
                     effectiveAmount = Double.parseDouble(amount.getText());
@@ -703,8 +705,10 @@ public class GUIHandler {
                     JLabel label = new JLabel("The amount must be a number in the format 0.00");
                     label.setVisible(true);
                     label.setHorizontalAlignment(SwingConstants.CENTER);
-                    if (panel2.getComponentCount() > 0) {
-                        panel2.remove(0);
+                    if (panel2.getComponentCount() > 9) {
+                        for (int i = 0; i < 10; i++) {
+                            panel2.remove(0);
+                        }
                     }
                     panel2.add(label, BorderLayout.CENTER);
                     //refresh the frame
@@ -712,18 +716,24 @@ public class GUIHandler {
                     return;
                 }
 
-                //TODO lista di multiple conversioni
-                /*
-                JLabel label = new JLabel("The converted amount is: " + conversion);
-                label.setVisible(true);
-                label.setHorizontalAlignment(SwingConstants.CENTER);
-                if (panel2.getComponentCount() > 0) {
-                    panel2.remove(0);
+                Map<String, Double> conversionRateList;
+                // riempire conversionRateList
+
+                if (panel2.getComponentCount() > 9) {
+                    for(int i=0; i<10; i++) {
+                        panel2.remove(0);
+                    }
                 }
-                panel2.add(label, BorderLayout.CENTER);
-                //refresh the frame
-                multipleConversionConvFrame.revalidate();
-                */
+
+                conversionRateList = MultipleConverterExecutor.startConversionRateGUI(currencies.getSelectedItem().toString(), true);
+                conversionRateList.forEach((k, v) -> {
+                    JLabel label = new JLabel("The converted amount to " + k + " is: " + v * effectiveAmount);
+                    label.setVisible(true);
+                    label.setHorizontalAlignment(SwingConstants.CENTER);
+                    panel2.add(label, BorderLayout.CENTER);
+                    //refresh the frame
+                    multipleConversionConvFrame.revalidate();
+                });
             }
         });
 
@@ -791,13 +801,29 @@ public class GUIHandler {
         panel2.setVisible(true);
         panel2.setLayout(new GridLayout(0,1));
 
-        JButton button1 = new JButton("Get conversion rate");
+        JButton button1 = new JButton("Get conversion rates");
         button1.setVisible(true);
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ArrayList<Double> conversionRateList;
-                //TODO riempire conversionRateList
+                Map<String, Double> conversionRateList;
+                // riempire conversionRateList
+
+                if (panel2.getComponentCount() > 9) {
+                    for(int i=0; i<10; i++) {
+                        panel2.remove(0);
+                    }
+                }
+
+                conversionRateList = MultipleConverterExecutor.startConversionRateGUI(currencies.getSelectedItem().toString(), true);
+                conversionRateList.forEach((k, v) -> {
+                    JLabel label = new JLabel("The conversion rate of " + k + " is: " + v);
+                    label.setVisible(true);
+                    label.setHorizontalAlignment(SwingConstants.CENTER);
+                    panel2.add(label, BorderLayout.CENTER);
+                    //refresh the frame
+                    multipleConversionConvRatesFrame.revalidate();
+                });
             }
         });
 
