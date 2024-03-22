@@ -8,8 +8,7 @@ import java.awt.event.MouseEvent;
 import static java.awt.BorderLayout.CENTER;
 
 public class GraphicApp {
-
-    static void lookAndFeel() {
+    private static void lookAndFeel(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
