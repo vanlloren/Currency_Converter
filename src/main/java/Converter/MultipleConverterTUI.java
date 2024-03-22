@@ -3,7 +3,7 @@ package Converter;
 import Util.CurrenciesArray;
 import java.util.Scanner;
 
-public class MultipleConverter {
+public class MultipleConverterTUI {
 
     CurrenciesArray currenciesArray = new CurrenciesArray();
 
@@ -36,7 +36,7 @@ public class MultipleConverter {
                     } while (currency.equals(""));
                     System.out.println("These are all the conversion rates of the other currencies for " + currenciesArray.getCurrencyName(currency));
 
-                    currenciesArray.getCurrency(currency).getConversionRatesArray().forEach((k, v) -> System.out.println(k + " : " + v));
+                    MultipleConverterExecutor.startConversionRateTUI(currency).forEach((k, v) -> System.out.println(k + " : " + v));
 
                     break;
                 case 2:
@@ -58,7 +58,7 @@ public class MultipleConverter {
                     System.out.println("Enter the amount of " + currenciesArray.getCurrencyName(currency) + " you want to convert to all other currencies:");
                     double amount = scanner.nextDouble();
 
-                    currenciesArray.getCurrency(currency).getConversionRatesArray().forEach((k, v) -> System.out.println(k + " : " + v * amount));
+                    MultipleConverterExecutor.startConversionRateTUI(currency).forEach((k, v) -> System.out.println(k + " : " + v * amount));
                     break;
             }
         }
