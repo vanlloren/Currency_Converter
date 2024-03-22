@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class GUIHandler {
 
@@ -67,7 +70,12 @@ public class GUIHandler {
         button2.setBackground(Color.BLUE);
         button2.setForeground(Color.BLACK);
         button2.setFont(new Font("Arial", Font.BOLD, 12));
-        // TODO button2.addMouseListener(new MouseAdapter() {
+        button2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e){
+                multipleConversionMenu1(mainMenuFrame);
+            }
+        });
 
         button3.setVisible(true);
         button3.setOpaque(true);
@@ -555,6 +563,271 @@ public class GUIHandler {
         panel.add(panel10);
         panel.add(label1);
         panel.add(button1);
+    }
+
+    public static void multipleConversionMenu1(JFrame mainMenuFrame){
+        mainMenuFrame.setVisible(false);
+        JFrame multipleConversionFrame = new JFrame("Conversion software - Multiple conversion");
+        multipleConversionFrame.setVisible(true);
+        multipleConversionFrame.setLayout(new BorderLayout());
+        multipleConversionFrame.setSize(600, 250);
+
+        JPanel panel = new JPanel();
+        panel.setVisible(true);
+        panel.setLayout(new GridLayout(1,0));
+
+        JButton button1 = new JButton("Get conversion rates of a currency");
+        JButton button2 = new JButton("Convert a specific amount of a currency");
+        JButton button3 = new JButton("Back to main menu");
+
+        button1.setVisible(true);
+        button1.setOpaque(true);
+        button1.setContentAreaFilled(true);
+        button1.setBorderPainted(false);
+        button1.setFocusPainted(false);
+        button1.setBackground(Color.GREEN);
+        button1.setForeground(Color.BLACK);
+        button1.setFont(new Font("Arial", Font.BOLD, 10));
+        button1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e){
+                multipleConversionFrame.setVisible(false);
+                multipleConversionMenuConvRates(multipleConversionFrame);
+            }
+        });
+
+        button2.setVisible(true);
+        button2.setOpaque(true);
+        button2.setContentAreaFilled(true);
+        button2.setBorderPainted(false);
+        button2.setFocusPainted(false);
+        button2.setBackground(Color.BLUE);
+        button2.setForeground(Color.BLACK);
+        button2.setFont(new Font("Arial", Font.BOLD, 10));
+        button2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                multipleConversionFrame.setVisible(false);
+                multipleConversionMenuConv(multipleConversionFrame);
+            }
+        });
+
+        button3.setVisible(true);
+        button3.setOpaque(true);
+        button3.setContentAreaFilled(true);
+        button3.setBorderPainted(false);
+        button3.setFocusPainted(false);
+        button3.setBackground(Color.YELLOW);
+        button3.setForeground(Color.BLACK);
+        button3.setFont(new Font("Arial", Font.BOLD, 10));
+        button3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                multipleConversionFrame.setVisible(false);
+                begin();
+            }
+        });
+
+        panel.add(button1);
+        panel.add(button2);
+
+        multipleConversionFrame.add(panel, BorderLayout.CENTER);
+        multipleConversionFrame.add(button3, BorderLayout.SOUTH);
+
+        multipleConversionFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+
+    }
+
+    public static void multipleConversionMenuConv(JFrame multipleConversionFrame){
+        multipleConversionFrame.setVisible(false);
+        JFrame multipleConversionConvFrame = new JFrame("Conversion software - Multiple conversion - Conversion");
+        multipleConversionConvFrame.setVisible(true);
+        multipleConversionConvFrame.setLayout(new GridLayout(0,2));
+        multipleConversionConvFrame.setSize(600,250);
+        multipleConversionConvFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+
+        JComboBox<String> currencies = new JComboBox<>();
+        currencies.addItem("USD");
+        currencies.addItem("EUR");
+        currencies.addItem("JPY");
+        currencies.addItem("GBP");
+        currencies.addItem("CHF");
+        currencies.addItem("CNY");
+        currencies.addItem("ARS");
+        currencies.addItem("RUB");
+        currencies.addItem("BRL");
+        currencies.addItem("INR");
+
+        JTextField amount = new JTextField();
+        amount.setVisible(true);
+
+        JPanel panel1 = new JPanel();
+        panel1.setVisible(true);
+        panel1.setLayout(new GridLayout(0,2));
+
+        panel1.add(currencies);
+        panel1.add(amount);
+
+        JPanel panel2 = new JPanel();
+        panel2.setVisible(true);
+        panel2.setLayout(new BorderLayout());
+
+        JPanel panel3 = new JPanel();
+        panel3.setVisible(true);
+        panel3.setLayout(new GridLayout(0,1));
+
+        JPanel panel4 = new JPanel();
+        panel4.setVisible(true);
+        panel4.setLayout(new GridLayout(3,0));
+
+        JButton button1 = new JButton("Convert");
+        button1.setVisible(true);
+        button1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ArrayList<Double> conversionList;
+                double effectiveAmount;
+                try {
+                    effectiveAmount = Double.parseDouble(amount.getText());
+                } catch (NumberFormatException ex) {
+                    JLabel label = new JLabel("The amount must be a number in the format 0.00");
+                    label.setVisible(true);
+                    label.setHorizontalAlignment(SwingConstants.CENTER);
+                    if (panel2.getComponentCount() > 0) {
+                        panel2.remove(0);
+                    }
+                    panel2.add(label, BorderLayout.CENTER);
+                    //refresh the frame
+                    multipleConversionConvFrame.revalidate();
+                    return;
+                }
+
+                //TODO lista di multiple conversioni
+                /*
+                JLabel label = new JLabel("The converted amount is: " + conversion);
+                label.setVisible(true);
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                if (panel2.getComponentCount() > 0) {
+                    panel2.remove(0);
+                }
+                panel2.add(label, BorderLayout.CENTER);
+                //refresh the frame
+                multipleConversionConvFrame.revalidate();
+                */
+            }
+        });
+
+        JButton button2 = new JButton("Back to main menu");
+        button2.setVisible(true);
+        button2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                multipleConversionConvFrame.setVisible(false);
+                begin();
+            }
+        });
+
+        JButton button3 = new JButton("Back to single conversion menu");
+        button3.setVisible(true);
+        button3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                multipleConversionConvFrame.setVisible(false);
+                multipleConversionMenu1(multipleConversionConvFrame);
+            }
+        });
+
+        panel3.add(panel1);
+        panel3.add(panel4);
+        panel4.add(button1);
+        panel4.add(button2);
+        panel4.add(button3);
+
+        multipleConversionConvFrame.add(panel3);
+        multipleConversionConvFrame.add(panel2);
+    }
+
+    public static void multipleConversionMenuConvRates(JFrame multipleConversionFrame){
+        multipleConversionFrame.setVisible(false);
+        JFrame multipleConversionConvRatesFrame = new JFrame("Conversion software - Single conversion - Conversion rates");
+        multipleConversionConvRatesFrame.setVisible(true);
+        multipleConversionConvRatesFrame.setLayout(new GridLayout(0,2));
+        multipleConversionConvRatesFrame.setSize(600, 250);
+        multipleConversionConvRatesFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent){
+                System.exit(0);
+            }
+        });
+
+        JComboBox<String> currencies = new JComboBox<>();
+
+        currencies.addItem("USD");
+        currencies.addItem("EUR");
+        currencies.addItem("JPY");
+        currencies.addItem("GBP");
+        currencies.addItem("CHF");
+        currencies.addItem("CNY");
+        currencies.addItem("ARS");
+        currencies.addItem("RUB");
+        currencies.addItem("BRL");
+        currencies.addItem("INR");
+
+        JPanel panel1 = new JPanel();
+        panel1.setVisible(true);
+        panel1.setLayout(new GridLayout(0,1));
+
+        JPanel panel2 = new JPanel();
+        panel2.setVisible(true);
+        panel2.setLayout(new GridLayout(0,1));
+
+        JButton button1 = new JButton("Get conversion rate");
+        button1.setVisible(true);
+        button1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ArrayList<Double> conversionRateList;
+                //TODO riempire conversionRateList
+            }
+        });
+
+        JButton button2 = new JButton("Back to main menu");
+        button2.setVisible(true);
+        button2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                multipleConversionConvRatesFrame.setVisible(false);
+                begin();
+            }
+        });
+
+        JButton button3 = new JButton("Back to multiple conversion menu");
+        button3.setVisible(true);
+        button3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                multipleConversionConvRatesFrame.setVisible(false);
+                multipleConversionMenu1(multipleConversionConvRatesFrame);
+            }
+        });
+
+        panel1.add(currencies);
+        panel1.add(button1);
+        panel1.add(button2);
+        panel1.add(button3);
+        multipleConversionConvRatesFrame.add(panel1);
+        multipleConversionConvRatesFrame.add(panel2);
+
     }
 
 }
