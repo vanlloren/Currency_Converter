@@ -1,6 +1,6 @@
 package TUI;
 
-import Converter.MultipleConverter;
+import Converter.MultipleConverterTUI;
 import Converter.SingleConverterTUI;
 
 public class ConversionLauncher {
@@ -11,7 +11,7 @@ public class ConversionLauncher {
             singleConverter.convert();
         } else {
             System.out.println("Initializing 1vsAll conversion process...");
-            MultipleConverter multipleConverter = new MultipleConverter();
+            MultipleConverterTUI multipleConverter = new MultipleConverterTUI();
             multipleConverter.convert();
         }
     }
